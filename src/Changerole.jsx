@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const ChangeUserRole = () => {
   const [email, setEmail] = useState('');
-  const [authority, setAuthority] = useState('seller'); // Default value is 'seller'
+  const [authority, setAuthority] = useState('seller'); 
   const [msg, setMsg] = useState('');
 
   const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGVjb21obW1tIiwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2OTAzMDQ4NDh9.PIKe6EEBFDxAtUmzt_viDZewRgq1uHPqnoto8I0ZxYI"; 
