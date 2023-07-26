@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
  import AddProductForm from './Addproduct';
  import ChangeUserRole from './Changerole'; 
  import UserList from './Userslist';
+import JsonFileUpload from './jsonfileupload';
  function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
         <Route path="/products" element={<SellerProducts />} />
         <Route path="/change/role" element={<ChangeUserRole />} />
         <Route path="/users" element={<UserList />} />
+        <Route path="/upload" element={<JsonFileUpload />} />
         {/* <Route path="/messages" element={<Messages />} />
         <Route path="/chat" element={<Chats />} /> */}
       </Routes>
