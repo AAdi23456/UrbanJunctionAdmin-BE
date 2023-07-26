@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate} from 'react-router-dom';
+
 const token =JSON.parse(localStorage.getItem("token"))
 const JsonFileUpload = () => {
+  const navigate = useNavigate();
   const [jsonData, setJsonData] = useState(null);
   const [category, setCategory] = useState('');
 
   const handleFileChange = (event) => {
+
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -48,6 +52,7 @@ const JsonFileUpload = () => {
       );
 
       console.log(response.data);
+      navigate("/products")
     } catch (error) {
       console.error(error);
     }

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { Link, useNavigate} from 'react-router-dom';
 
 const SignupForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const role = 'seller'; // Role is fixed as 'seller'
-
+  const role = 'seller'; 
+  const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
 
@@ -24,7 +25,9 @@ const SignupForm = () => {
       const data = await response.json();
 
       if (response.ok) {
+
         setSuccessMsg(data.msg);
+        navigate("/login")
         setErrorMsg('');
         setName('');
         setEmail('');
@@ -59,6 +62,12 @@ const SignupForm = () => {
         </form>
         {errorMsg && <p style={{ color: 'red', marginTop: '-15px', marginBottom: '15px' }}>{errorMsg}</p>}
         {successMsg && <p style={{ color: 'green', marginTop: '-15px', marginBottom: '15px' }}>{successMsg}</p>}
+
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <Link to="/login">
+            <button style={{ padding: '10px', border: 'none', borderRadius: '3px', color: '#fff', backgroundColor: 'green', fontSize: '16px', cursor: 'pointer' }}>Login</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

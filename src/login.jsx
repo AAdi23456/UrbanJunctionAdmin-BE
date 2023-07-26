@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [errorMsg, setErrorMsg] = useState('');
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,8 +23,8 @@ const LoginForm = () => {
       const data = await response.json();
 
       if (response.ok) {
-        if(data.role==="user"){
-            return alert("Not Authorised")
+        if (data.role === "user") {
+          return alert("Not Authorized");
         }
         localStorage.setItem("token", JSON.stringify(data.token));
         localStorage.setItem("role", JSON.stringify(data.role));
@@ -45,7 +44,7 @@ const LoginForm = () => {
         <h1 style={{ textAlign: 'center' }}>Login</h1>
         <form onSubmit={handleSubmit}>
           <label style={{ display: 'block', marginBottom: '5px' }} htmlFor="email">Email:</label>
-          <input  id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: '100%', padding: '10px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '3px', fontSize: '16px' }} required />
+          <input id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: '100%', padding: '10px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '3px', fontSize: '16px' }} required />
 
           <label style={{ display: 'block', marginBottom: '5px' }} htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} style={{ width: '100%', padding: '10px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '3px', fontSize: '16px' }} required />
@@ -53,6 +52,12 @@ const LoginForm = () => {
           <button type="submit" style={{ width: '100%', padding: '10px', border: 'none', borderRadius: '3px', color: '#fff', backgroundColor: '#007bff', fontSize: '16px', cursor: 'pointer' }}>Login</button>
         </form>
         {errorMsg && <p style={{ color: 'red', marginTop: '-15px', marginBottom: '15px' }}>{errorMsg}</p>}
+
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <Link to="/signup">
+            <button style={{ padding: '10px', border: 'none', borderRadius: '3px', color: '#fff', backgroundColor: 'green', fontSize: '16px', cursor: 'pointer' }}>Sign Up</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
