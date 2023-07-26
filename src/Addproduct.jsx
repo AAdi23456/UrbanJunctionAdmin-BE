@@ -1,7 +1,7 @@
 // src/components/AddProductForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
-const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGVjb21tbW0iLCJyb2xlIjoic2VsbGVyIiwiaWF0IjoxNjkwMzAwMTQ3fQ.HKp-4AJo1mOHLYyjFz5PCtlhYrV5yuGZ6i9qJPkvGqw"
+const token =JSON.parse(localStorage.getItem("token"))
 const AddProductForm = () => {
   const [formData, setFormData] = useState({
     img: '',

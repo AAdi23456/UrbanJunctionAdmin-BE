@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGVjb21obW1tIiwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2OTAzMDQ4NDh9.PIKe6EEBFDxAtUmzt_viDZewRgq1uHPqnoto8I0ZxYI"; 
+const token =JSON.parse(localStorage.getItem("token"))
 const JsonFileUpload = () => {
   const [jsonData, setJsonData] = useState(null);
   const [category, setCategory] = useState('');

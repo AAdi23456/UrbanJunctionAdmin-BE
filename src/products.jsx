@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGVjb21obW1tIiwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2OTAzMDQ4NDh9.PIKe6EEBFDxAtUmzt_viDZewRgq1uHPqnoto8I0ZxYI"; // Replace with the actual authentication token
-
+const token =JSON.parse(localStorage.getItem("token"))
 const MenProducts = () => {
   const [products, setProducts] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
