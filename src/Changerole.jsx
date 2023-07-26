@@ -13,7 +13,8 @@ const ChangeUserRole = () => {
       const headers = {
         token: token,
       };
-      const response = await axios.put('https://gifted-tights-yak.cyclic.app/change/role', { email, authority }, { headers });
+      
+      const response = await axios.put('https://gifted-tights-yak.cyclic.app/change/role', { emailtochange:email, authority }, { headers });
       setMsg(response.data.msg);
     } catch (error) {
       setMsg('Something went wrong, please try again later.');

@@ -1,32 +1,115 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const UserList = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [role, setRole] = useState('');
   const [users, setUsers] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
 
   const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGVjb21obW1tIiwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2OTAzMDQ4NDh9.PIKe6EEBFDxAtUmzt_viDZewRgq1uHPqnoto8I0ZxYI"; // Replace with the actual authentication token
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       const headers = {
         token: token,
       };
-      const response = await axios.get('https://gifted-tights-yak.cyclic.app/users/get', { params: { email, name }, headers });
+      const response = await axios.get('https://gifted-tights-yak.cyclic.app/users/get', { params: { email, name, role }, headers });
       setUsers(response.data);
     } catch (error) {
       setErrorMsg('Something went wrong, please try again later.');
     }
+  }, [email, name, role, token]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  const containerStyle = {
+    textAlign: 'center',
+    padding: '20px',
   };
 
-  const handleSearch = () => {
-    fetchUsers();
+  const headingStyle = {
+    fontSize: '24px',
+    marginBottom: '10px',
+  };
+
+  const searchContainerStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '20px',
+  };
+
+  const inputStyle = {
+    padding: '8px',
+    marginRight: '10px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+  };
+
+  const selectStyle = {
+    padding: '8px',
+    marginRight: '10px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+  };
+
+  const buttonStyle = {
+    padding: '8px 12px',
+    background: '#007bff',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+  };
+
+  const errorStyle = {
+    fontSize: '16px',
+    color: '#f00',
+  };
+
+  const gridContainerStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '20px',
+  };
+
+  const cardStyle = {
+    padding: '15px',
+    borderRadius: '5px',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+    border: '1px solid #ccc',
+    textAlign: 'left',
+  };
+
+  const cardTitleStyle = {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    marginBottom: '10px',
+  };
+
+  const emptyStyle = {
+    fontSize: '18px',
+    color: '#999',
+  };
+
+  const handleBlockUser = async (userEmail, isBlock) => {
+    try {
+      const headers = {
+        token: token,
+      };
+      await axios.put(
+        'https://gifted-tights-yak.cyclic.app/block/user',
+        { useremail: userEmail, isblock: isBlock },
+        { headers }
+      );
+      // Refresh the user list after successful block/unblock
+      fetchUsers();
+    } catch (error) {
+      setErrorMsg('Something went wrong, please try again later.');
+    }
   };
 
   return (
@@ -47,77 +130,52 @@ const UserList = () => {
           onChange={(e) => setName(e.target.value)}
           style={inputStyle}
         />
-        <button style={buttonStyle} onClick={handleSearch}>
+        <select
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          style={selectStyle}
+        >
+          <option value="">All Roles</option>
+          <option value="seller">Seller</option>
+          <option value="user">User</option>
+          <option value="Admin">Admin</option>
+          <option value="superadmin">Superadmin</option>
+        </select>
+        <button style={buttonStyle} onClick={fetchUsers}>
           Search
         </button>
       </div>
       {errorMsg && <p style={errorStyle}>{errorMsg}</p>}
-      {users.length > 0 ? (
-        <ul style={listStyle}>
-          {users.map((user) => (
-            <li key={user._id} style={itemStyle}>
+      <div style={gridContainerStyle}>
+        {users.length > 0 ? (
+          users.map((user) => (
+            <div key={user._id} style={cardStyle}>
+              <p style={cardTitleStyle}>Name: {user.name}</p>
               <p>Email: {user.email}</p>
-              <p>Name: {user.name}</p>
-              {/* Add other user details as needed */}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p style={emptyStyle}>No users found.</p>
-      )}
+              <p>Role: {user.role}</p>
+              {user.Blocked ? (
+                <button
+                  style={buttonStyle}
+                  onClick={() => handleBlockUser(user.email, false)}
+                >
+                  Unblock
+                </button>
+              ) : (
+                <button
+                  style={buttonStyle}
+                  onClick={() => handleBlockUser(user.email, true)}
+                >
+                  Block
+                </button>
+              )}
+            </div>
+          ))
+        ) : (
+          <p style={emptyStyle}>No users found.</p>
+        )}
+      </div>
     </div>
   );
-};
-
-const containerStyle = {
-  textAlign: 'center',
-  padding: '20px',
-};
-
-const headingStyle = {
-  fontSize: '24px',
-  marginBottom: '10px',
-};
-
-const searchContainerStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  marginBottom: '20px',
-};
-
-const inputStyle = {
-  padding: '8px',
-  marginRight: '10px',
-  borderRadius: '5px',
-  border: '1px solid #ccc',
-};
-
-const buttonStyle = {
-  padding: '8px 12px',
-  background: '#007bff',
-  color: '#fff',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: 'pointer',
-};
-
-const errorStyle = {
-  fontSize: '16px',
-  color: '#f00',
-};
-
-const listStyle = {
-  listStyleType: 'none',
-  padding: '0',
-};
-
-const itemStyle = {
-  marginBottom: '20px',
-};
-
-const emptyStyle = {
-  fontSize: '18px',
-  color: '#999',
 };
 
 export default UserList;
