@@ -29,7 +29,7 @@ const Dashboard = () => {
             </Link>
           )}
           <Link to="/upload">
-            <button style={{ padding: '10px', marginBottom: '10px' }}>JSON File Upload</button>
+            <button style={{ padding: '10px', marginBottom: '10px' }}>Multiple data Upload</button>
           </Link>
           <Link to="/logout">
             <button style={{ padding: '10px', marginBottom: '10px' }}>Logout</button>

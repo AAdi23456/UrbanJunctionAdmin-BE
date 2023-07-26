@@ -60,7 +60,7 @@ if(response.data.msg){
                 <div style={buttonContainerStyle}>
                   <button style={buttonStyle} onClick={() => handleDelete(product._id)}>Delete</button>
                   {/* Add modify button and handle modification logic */}
-                  <button style={buttonStyle}>Modify</button>
+                  {/* <button style={buttonStyle}>Modify</button> */}
                 </div>
               </div>
             </li>

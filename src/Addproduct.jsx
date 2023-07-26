@@ -26,10 +26,11 @@ const AddProductForm = () => {
     const headers={
       token:token
     }
+    //const data=[formData]
     try {
-      const response = await axios.post('https://gifted-tights-yak.cyclic.app/Products/add', [formData],{headers});
-      console.log(response.data);
-      // Reset the form after successful submission
+      const response = await axios.post('https://gifted-tights-yak.cyclic.app/Products/add', {Data:[formData]},{headers});
+      console.log(response);
+      
       setFormData({
         img: '',
         title: '',

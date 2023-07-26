@@ -30,7 +30,7 @@ const LoginForm = () => {
         localStorage.setItem("token", JSON.stringify(data.token));
         localStorage.setItem("role", JSON.stringify(data.role));
         setErrorMsg('');
-        navigate('/dashboard');
+        navigate('/');
       } else {
         setErrorMsg(data.msg);
       }
