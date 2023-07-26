@@ -17,7 +17,7 @@ const UserList = () => {
       const response = await axios.get('https://gifted-tights-yak.cyclic.app/users/get', { params: { email, name, role }, headers });
       setUsers(response.data);
     } catch (error) {
-      setErrorMsg('Something went wrong, please try again later.');
+      setErrorMsg(error.response.data.msg);
     }
   }, [email, name, role, token]);
 
@@ -104,10 +104,10 @@ const UserList = () => {
         { useremail: userEmail, isblock: isBlock },
         { headers }
       );
-      // Refresh the user list after successful block/unblock
+      
       fetchUsers();
     } catch (error) {
-      setErrorMsg('Something went wrong, please try again later.');
+      setErrorMsg(error.response.data.msg);
     }
   };
 

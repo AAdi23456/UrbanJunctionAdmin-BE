@@ -14,8 +14,12 @@ const MenProducts = () => {
       try {
         const response = await axios.get('https://gifted-tights-yak.cyclic.app/products/seller', { headers });
         setProducts(response.data);
-
+        console.log(response);
+if(response.data.msg){
+  setErrorMsg(response.data.msg);
+}
       } catch (error) {
+        console.log(error);
         setErrorMsg('Something went wrong, please try again later.');
       }
     };
@@ -63,7 +67,7 @@ const MenProducts = () => {
           ))}
         </ul>
       ) : (
-        <p style={emptyStyle}>No men's products found.</p>
+        <p style={emptyStyle}>No  products found.</p>
       )}
     </div>
   );
