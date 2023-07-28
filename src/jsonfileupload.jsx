@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const token =JSON.parse(localStorage.getItem("token"))
+const token = JSON.parse(localStorage.getItem("token"))
 const JsonFileUpload = () => {
   const navigate = useNavigate();
   const [jsonData, setJsonData] = useState(null);
@@ -39,17 +39,19 @@ const JsonFileUpload = () => {
         return;
       }
 
-      
+
       const Data = jsonData;
-        const headers={
-            token:token
-        }
-      const response = await axios.post('https://gifted-tights-yak.cyclic.app/Products/add', {
-     
+      const headers = {
+        token: token
+      }
+      console.log(headers)
+      const data = {
         category,
-        Data,
-      },{headers}
-      );
+        Data
+      };
+      const response = await axios.post('https://gifted-tights-yak.cyclic.app/Products/add', data, {
+        headers: headers,
+      });
 
       console.log(response.data);
       navigate("/products")
