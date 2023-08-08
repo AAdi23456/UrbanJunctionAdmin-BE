@@ -2,6 +2,8 @@
 
 Welcome to the frontend repository of our e-commerce admin application. This repository contains the React code that powers the user-friendly admin dashboard for managing products, orders, and other essential functionalities of our online shopping platform.
 
+Only sellers can create a new account.Admin and Superadmin account will be created directly from the backend
+
 ## it is bascilly the admin side of this website - https://urbanjunction.netlify.app/ 
 
 ## backend repo-https://github.com/AAdi23456/UrbanJunction-BE.git
