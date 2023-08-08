@@ -2,6 +2,9 @@
 
 Welcome to the frontend repository of our e-commerce admin application. This repository contains the React code that powers the user-friendly admin dashboard for managing products, orders, and other essential functionalities of our online shopping platform.
 
+## it is bascilly the admin side of this website - https://urbanjunction.netlify.app/ but this project main tech-stack is react.js 
+## backend repo-https://github.com/AAdi23456/UrbanJunction-BE.git
+
 ## Features
 
 - Manage products: Add, edit, and delete products from the catalog.
